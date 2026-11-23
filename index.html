@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Envydia</title>
+<meta name="description" content="Envydia is an open character: black bob, one green streak, a headset mic. Her pictures, her canon and the files to make her yourself.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="Envydia">
+<meta property="og:description" content="An open character. Black bob, one green streak, a headset mic.">
+<meta property="og:image" content="https://envydia-dev-eb15.vercel.app/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@EnvydiaGallery">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap">
+<link rel="preload" as="image" href="/img/envydia.webp">
+<style>
+:root {
+  --green: #76b900;
+  --ink: #f3f3f1;
+  --soft: #cfcfcb;
+  --mute: #96968f;
+  --line: #242424;
+  --pad: clamp(20px, 4vw, 56px);
+  --edge: max(var(--pad), calc((100vw - 1320px) / 2 + var(--pad)));
+}
+* { box-sizing: border-box; }
+html { background: #000; scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  margin: 0;
+  color: var(--ink);
+  font: 400 16px/1.6 Archivo, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--green); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 var(--pad); }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 12px; top: 12px; z-index: 20; background: var(--green); color: #000; padding: 8px 12px; }
+
+/* header */
+.top { position: sticky; top: 0; z-index: 10; background: #000; border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 28px; height: 60px; }
+.mark { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; letter-spacing: -.01em; text-decoration: none; }
+.mark img { width: 28px; height: 28px; }
+.top nav { display: flex; gap: 26px; margin-left: auto; font-size: 15px; }
+.top nav a { color: var(--mute); text-decoration: none; }
+.top nav a:hover { color: var(--ink); }
+.top .x { font-size: 15px; text-decoration: none; white-space: nowrap; }
+
+/* buttons */
+.btn {
+  display: inline-block; padding: 11px 20px;
+  font: 600 15px/1.4 inherit; font-family: inherit;
+  color: var(--ink); background: none; border: 1px solid #6b6b66;
+  text-decoration: none; cursor: pointer; border-radius: 0;
+}
+.btn:hover { border-color: var(--green); color: var(--green); }
+.btn.go { background: var(--green); border-color: var(--green); color: #000; }
+.btn.go:hover { background: #8ed100; border-color: #8ed100; color: #000; }
+.btn.sm { padding: 7px 14px; font-size: 14px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* hero */
+.hero {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: end;
+  min-height: min(calc(100svh - 61px), 840px);
+}
+.hero-text { position: relative; z-index: 1; padding: 0 0 clamp(40px, 7vw, 92px) var(--edge); }
+.hero h1 { margin: 0 0 24px; font-size: clamp(54px, 8.2vw, 128px); font-weight: 600; line-height: .92; letter-spacing: -.045em; }
+.hero p { margin: 0 0 28px; max-width: 21em; font-size: clamp(18px, 1.55vw, 22px); line-height: 1.4; color: var(--soft); }
+.hero-img { position: relative; align-self: stretch; }
+.hero-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+.hero-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #000 0, rgba(0, 0, 0, 0) 26%); }
+
+/* gallery */
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 0 6px; }
+.gallery figure { margin: 0; }
+.gallery button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.gallery figcaption { display: flex; justify-content: space-between; gap: 12px; padding: 10px 8px 0; font-size: 14px; color: var(--mute); }
+.gallery figcaption b { color: var(--ink); font-weight: 600; }
+.more { margin: 26px 0 0; padding: 0 var(--edge); color: var(--mute); font-size: 15px; }
+.more a { color: var(--ink); }
+
+/* sections */
+.sec { margin-top: clamp(72px, 9vw, 128px); }
+.sec > .wrap { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 32px; }
+.sec > .wrap::before { content: ""; grid-column: 1 / -1; border-top: 1px solid var(--line); margin-bottom: -4px; }
+.sec h2 { margin: 0; font-size: 28px; font-weight: 600; line-height: 1.15; letter-spacing: -.02em; }
+.sec h2 + p { margin: 10px 0 0; color: var(--mute); max-width: 17em; }
+h3 { margin: 0 0 10px; font-size: 17px; font-weight: 600; }
+
+.who { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 40px; align-items: start; }
+.details { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 6px; }
+.details figure { margin: 0 0 10px; }
+.details figcaption { padding-top: 7px; font-size: 13.5px; color: var(--mute); }
+.canon { margin: 0; }
+.canon div { display: grid; grid-template-columns: 96px 1fr; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.canon div:first-child { padding-top: 0; }
+.canon dt { color: var(--mute); }
+.canon dd { margin: 0; }
+.chip { display: inline-block; width: 11px; height: 11px; margin-right: 6px; background: var(--green); vertical-align: -1px; }
+
+.make { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr); gap: 44px; }
+.make p, .make li { color: var(--soft); }
+.make p { margin: 0 0 14px; }
+.make ol, .make ul { margin: 0 0 14px; padding-left: 20px; }
+.make li { margin-bottom: 8px; }
+.prompt { margin: 0 0 18px; padding-left: 16px; border-left: 2px solid var(--green); color: var(--ink) !important; }
+
+.agents { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 44px; align-items: start; }
+pre { margin: 0; padding: 16px 18px; white-space: pre-wrap; overflow-wrap: anywhere; background: #0c0c0c; border: 1px solid var(--line); font: 13.5px/1.75 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: var(--ink); }
+pre i { font-style: normal; color: var(--mute); }
+pre b { font-weight: 400; }
+.files { margin: 0; padding: 0; list-style: none; }
+.files li { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.files li:first-child { padding-top: 0; }
+.files a { white-space: nowrap; }
+.files span { color: var(--mute); text-align: right; }
+
+footer { margin-top: clamp(72px, 9vw, 128px); border-top: 1px solid var(--line); padding: 28px 0 44px; font-size: 14px; color: var(--mute); }
+footer .wrap { display: flex; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap; }
+footer p { margin: 0; max-width: 46em; }
+footer a { color: var(--ink); }
+
+dialog { padding: 0; border: 0; background: #000; max-width: 96vw; max-height: 96vh; cursor: zoom-out; }
+dialog::backdrop { background: rgba(0, 0, 0, .92); }
+dialog img { width: auto; height: auto; max-width: 96vw; max-height: 96vh; }
+
+@media (max-width: 900px) {
+  .top nav { display: none; }
+  .top .x { margin-left: auto; }
+  .hero { display: flex; flex-direction: column-reverse; align-items: stretch; min-height: 0; }
+  .hero-img { aspect-ratio: 1; }
+  .hero-img::after { background: linear-gradient(0deg, #000 0, rgba(0, 0, 0, 0) 30%); }
+  .hero-text { padding: 0 var(--pad) 44px; margin-top: -56px; }
+  .gallery { grid-template-columns: 1fr; gap: 22px; }
+  .sec > .wrap, .who, .make, .agents { grid-template-columns: minmax(0, 1fr); }
+  .sec h2 + p { max-width: none; }
+  .who, .make, .agents { gap: 32px; }
+  .canon div { grid-template-columns: 84px 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#gallery">Skip to the gallery</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top"><img src="/img/mark.webp" width="28" height="28" alt="">Envydia</a>
+    <nav>
+      <a href="#gallery">Gallery</a>
+      <a href="#who">Who she is</a>
+      <a href="#make">Make her</a>
+      <a href="#agents">For agents</a>
+    </nav>
+    <a class="x" href="https://x.com/EnvydiaGallery" target="_blank" rel="noopener">@EnvydiaGallery</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Envydia</h1>
+      <p>An open character. Black bob, one green streak, a headset mic. Take her and make things.</p>
+      <div class="row">
+        <a class="btn go" href="#gallery">See the gallery</a>
+        <a class="btn" href="https://x.com/EnvydiaGallery" target="_blank" rel="noopener">Follow on X</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="/img/envydia.webp" width="1100" height="1100" alt="Envydia facing the camera: black bob with straight bangs, a green streak, silver hoops and a headset mic">
+    </div>
+  </div>
+
+  <div class="gallery" id="gallery">
+    <figure>
+      <button data-full="/img/rain.webp" aria-label="Open Rain at full size"><img src="/img/rain-760.webp" width="760" height="760" loading="lazy" alt="Envydia walking a wet pavement at dusk, cherry blossom and a lit tower behind her"></button>
+      <figcaption><b>Rain</b><span>Tokyo, blue hour</span></figcaption>
+    </figure>
+    <figure>
+      <button data-full="/img/red-rock.webp" aria-label="Open Red rock at full size"><img src="/img/red-rock-760.webp" width="760" height="760" loading="lazy" alt="Envydia standing on a red rock ledge above a canyon at sunset, hair lifted by wind"></button>
+      <figcaption><b>Red rock</b><span>Canyon rim, sunset</span></figcaption>
+    </figure>
+    <figure>
+      <button data-full="/img/glasshouse.webp" aria-label="Open Glasshouse at full size"><img src="/img/glasshouse-760.webp" width="760" height="760" loading="lazy" alt="Envydia in a glasshouse, one hand resting on a fern"></button>
+      <figcaption><b>Glasshouse</b><span>Ferns, morning light</span></figcaption>
+    </figure>
+  </div>
+  <p class="more">New pictures are posted on <a href="https://x.com/EnvydiaGallery" target="_blank" rel="noopener">X</a>.</p>
+
+  <section class="sec" id="who">
+    <div class="wrap">
+      <div>
+        <h2>Who she is</h2>
+        <p>These stay the same in every picture. If an image gets them right, it is her.</p>
+      </div>
+      <div class="who">
+        <div class="details">
+          <figure><img src="/img/detail-streak.webp" width="360" height="360" loading="lazy" alt="Close view of the green streak in her black hair"><figcaption>The streak</figcaption></figure>
+          <figure><img src="/img/detail-eyes.webp" width="360" height="360" loading="lazy" alt="Close view of her blue-grey eyes and freckles"><figcaption>Eyes and freckles</figcaption></figure>
+          <figure><img src="/img/detail-mic.webp" width="360" height="360" loading="lazy" alt="Close view of the headset mic and a silver hoop earring"><figcaption>Mic and hoop</figcaption></figure>
+          <figure><img src="/img/detail-zip.webp" width="360" height="360" loading="lazy" alt="Close view of the green zip on her black collar"><figcaption>The zip</figcaption></figure>
+        </div>
+        <dl class="canon">
+          <div><dt>Hair</dt><dd>Glossy black bob, cut blunt at the jaw, with straight bangs.</dd></div>
+          <div><dt>Streak</dt><dd>One green streak at the front, on her right. It reads on the left of the picture. <span class="chip"></span>#76B900</dd></div>
+          <div><dt>Mic</dt><dd>Black headset mic. The boom comes from her right and ends in a foam tip beside her mouth.</dd></div>
+          <div><dt>Hoops</dt><dd>Large, thin silver hoop earrings.</dd></div>
+          <div><dt>Face</dt><dd>Pale skin, freckles across the nose and cheeks, blue-grey eyes, dark liner. Calm and direct. She rarely smiles.</dd></div>
+          <div><dt>Jacket</dt><dd>Fitted black jacket with a high collar and a green zip.</dd></div>
+          <div><dt>Legs</dt><dd>Black cargo trousers cuffed at the ankle, black ankle boots.</dd></div>
+          <div><dt>Age</dt><dd>A grown woman. Never write girl or young in a prompt.</dd></div>
+          <div><dt>Colour</dt><dd>Black, plus whatever the setting brings. Green is the only accent she carries.</dd></div>
+          <div><dt>Medium</dt><dd>Photographic. Never illustrated or cel-shaded.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="make">
+    <div class="wrap">
+      <div>
+        <h2>Make her</h2>
+        <p>One prompt, one reference image and three checks.</p>
+      </div>
+      <div class="make">
+        <div>
+          <h3>Prompt</h3>
+          <p>Start with this, add a line for the setting, and attach the face sheet as your reference image.</p>
+          <p class="prompt" id="prompt">Envydia, a grown woman, glossy black blunt bob with straight bangs, one green streak (#76B900) at the front on her right side, black headset mic with the boom on her right, large thin silver hoop earrings, pale skin with freckles, blue-grey eyes, dark eyeliner, calm direct gaze, fitted black high-collar jacket with a green zip, black cargo trousers, black ankle boots, photographic, green as the only accent colour</p>
+          <div class="row">
+            <button class="btn sm go" data-copy="prompt">Copy prompt</button>
+            <a class="btn sm" href="/img/face-sheet.jpg" download="envydia-face-sheet.jpg">Download face sheet</a>
+          </div>
+        </div>
+        <div>
+          <h3>Check</h3>
+          <ol>
+            <li>The green streak is on her right, which is the left side of the picture.</li>
+            <li>The mic boom is on the same side as the streak.</li>
+            <li>The zip is green and the hoops are silver.</li>
+          </ol>
+          <p>Models like to mirror her. If the streak lands on the wrong side, flip the image or throw it out.</p>
+        </div>
+        <div>
+          <h3>Rules</h3>
+          <p>She is open. Make pictures, films, songs and merch with her, sell them, and you do not need to ask.</p>
+          <ul>
+            <li>She is a grown woman. Keep her one.</li>
+            <li>No sexual content.</li>
+            <li>Do not present your work as official, or as connected to any company.</li>
+          </ul>
+          <p>Credit is welcome and not required.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="agents">
+    <div class="wrap">
+      <div>
+        <h2>For agents</h2>
+        <p>The same canon as plain files.</p>
+      </div>
+      <div class="agents">
+        <pre><i># Read the summary</i>
+curl -s <b class="o">https://envydia-dev-eb15.vercel.app</b>/llms.txt
+
+<i># Load the canon as JSON</i>
+curl -s <b class="o">https://envydia-dev-eb15.vercel.app</b>/character.json
+
+<i># Install the skill</i>
+mkdir -p ~/.claude/skills/envydia
+curl -s <b class="o">https://envydia-dev-eb15.vercel.app</b>/skill/SKILL.md -o ~/.claude/skills/envydia/SKILL.md</pre>
+        <ul class="files">
+          <li><a href="/llms.txt">llms.txt</a><span>Plain-text summary</span></li>
+          <li><a href="/character.json">character.json</a><span>Canon, checks and rules</span></li>
+          <li><a href="/skill/SKILL.md">SKILL.md</a><span>Skill for coding agents</span></li>
+          <li><a href="/img/face-sheet.jpg">face-sheet.jpg</a><span>Reference image, 1254 px</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Envydia is an original character and fan work. This site is not affiliated with, endorsed by or sponsored by NVIDIA Corporation.</p>
+    <p><a href="https://x.com/EnvydiaGallery" target="_blank" rel="noopener">@EnvydiaGallery</a></p>
+  </div>
+</footer>
+
+<dialog id="viewer" aria-label="Full-size picture"><img alt=""></dialog>
+
+<script>
+// Full-size viewer for the gallery.
+const viewer = document.getElementById('viewer');
+document.querySelectorAll('.gallery button').forEach((button) => {
+  button.addEventListener('click', () => {
+    const thumb = button.querySelector('img');
+    const full = viewer.querySelector('img');
+    full.src = button.dataset.full;
+    full.alt = thumb.alt;
+    viewer.showModal();
+  });
+});
+viewer.addEventListener('click', () => viewer.close());
+
+// Copy buttons read the text of the element they point at.
+document.querySelectorAll('[data-copy]').forEach((button) => {
+  const label = button.textContent;
+  button.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(document.getElementById(button.dataset.copy).textContent);
+      button.textContent = 'Copied';
+    } catch (error) {
+      button.textContent = 'Select the text to copy';
+    }
+    setTimeout(() => { button.textContent = label; }, 1600);
+  });
+});
+
+// Show the commands with whatever domain the site is served from.
+if (location.protocol.startsWith('http')) {
+  document.querySelectorAll('pre .o').forEach((node) => { node.textContent = location.origin; });
+}
+</script>
+</body>
+</html>
